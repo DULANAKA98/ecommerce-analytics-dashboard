@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { DashboardData } from '../utils/dataProcessor';
-import { ArrowLeft, Target, TrendingUp, Users, DollarSign, Activity, PieChart, Focus } from 'lucide-react';
+import { ArrowLeft, Target, TrendingUp, Users, DollarSign, Activity, PieChart, Focus, Calendar } from 'lucide-react';
 import { EdaSection } from './views/EdaSection';
 import { FeatureInsights } from './views/FeatureInsights';
 import { CustomerSegments } from './views/CustomerSegments';
@@ -32,11 +32,12 @@ export const Dashboard: React.FC<{ data: DashboardData, onReset: () => void }> =
       </header>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
         <KpiCard title="Total Revenue" value={`$${data.metrics.totalRevenue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits:2})}`} icon={<DollarSign className="w-6 h-6 text-emerald-400" />} colorClass="emerald" />
         <KpiCard title="Total Orders" value={data.metrics.totalOrders.toLocaleString()} icon={<TrendingUp className="w-6 h-6 text-blue-400" />} colorClass="blue" />
         <KpiCard title="Total Customers" value={data.metrics.totalCustomers.toLocaleString()} icon={<Users className="w-6 h-6 text-indigo-400" />} colorClass="indigo" />
         <KpiCard title="Avg Order Value" value={`$${data.metrics.avgOrderValue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits:2})}`} icon={<Target className="w-6 h-6 text-purple-400" />} colorClass="purple" />
+        <KpiCard title="Data Coverage" value={`${data.metrics.startDate} to ${data.metrics.endDate}`} icon={<Calendar className="w-6 h-6 text-amber-400" />} colorClass="amber" isDateRange />
       </div>
 
       {/* Tabs */}
@@ -56,23 +57,32 @@ export const Dashboard: React.FC<{ data: DashboardData, onReset: () => void }> =
   );
 };
 
-const KpiCard: React.FC<{ title: string, value: string | number, icon: React.ReactNode, colorClass: string }> = ({ title, value, icon, colorClass }) => {
+const KpiCard: React.FC<{ title: string, value: string | number, icon: React.ReactNode, colorClass: string, isDateRange?: boolean }> = ({ title, value, icon, colorClass, isDateRange }) => {
   const colorMap: Record<string, string> = {
     emerald: 'bg-emerald-500/10 border-emerald-500/20 group-hover:bg-emerald-500/20',
     blue: 'bg-blue-500/10 border-blue-500/20 group-hover:bg-blue-500/20',
     indigo: 'bg-indigo-500/10 border-indigo-500/20 group-hover:bg-indigo-500/20',
     purple: 'bg-purple-500/10 border-purple-500/20 group-hover:bg-purple-500/20',
+    amber: 'bg-amber-500/10 border-amber-500/20 group-hover:bg-amber-500/20',
+  };
+
+  const getFontSize = (val: string | number) => {
+    if (isDateRange) return 'text-xs sm:text-sm';
+    const s = String(val);
+    if (s.length > 14) return 'text-lg sm:text-xl';
+    if (s.length > 10) return 'text-xl sm:text-2xl';
+    return 'text-2xl sm:text-3xl';
   };
 
   return (
-    <div className="glass-card p-6 rounded-[1.5rem] flex items-center gap-5 relative overflow-hidden group">
+    <div className="glass-card p-5 sm:p-6 rounded-[1.5rem] flex items-center gap-4 sm:gap-5 relative overflow-hidden group">
       <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-3xl -mr-10 -mt-10 transition-transform group-hover:scale-150"></div>
-      <div className={`p-4 border rounded-2xl shadow-inner transition-colors duration-300 relative z-10 ${colorMap[colorClass]}`}>
-        {icon}
+      <div className={`p-3 sm:p-4 border rounded-2xl shadow-inner transition-colors duration-300 relative z-10 flex-shrink-0 ${colorMap[colorClass]}`}>
+        {React.cloneElement(icon as React.ReactElement, { className: 'w-5 h-5 sm:w-6 sm:h-6' })}
       </div>
-      <div className="relative z-10">
-        <p className="text-slate-400 text-xs sm:text-sm font-semibold mb-1 tracking-wide uppercase">{title}</p>
-        <p className="text-2xl sm:text-3xl font-black text-white tracking-tight">{value}</p>
+      <div className="relative z-10 min-w-0">
+        <p className="text-slate-400 text-[10px] sm:text-xs font-semibold mb-1 tracking-wide uppercase truncate">{title}</p>
+        <p className={`${getFontSize(value)} font-black text-white tracking-tight leading-tight truncate`}>{value}</p>
       </div>
     </div>
   );

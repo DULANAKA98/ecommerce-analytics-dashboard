@@ -52,15 +52,6 @@ export const FeatureInsights: React.FC<{ data: DashboardData }> = ({ data }) => 
 
   return (
     <div className="space-y-8 animate-in slide-in-from-bottom-4 duration-700">
-      <DecisionCard 
-        title="Coupons & Payment Methods" 
-        insights={[
-          "Let's see if coupons actually make customers spend more overall. Sometimes people who would have bought anyway use coupons, which just loses you money.",
-          "Some payment methods (like certain cards or wallets) fail a lot. You need to make sure your customers can pay smoothly without errors.",
-          "Find the 'sweet spot' for discounts—the perfect percentage that encourages customers to buy more, without eating away your profits."
-        ]}
-      />
-
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Coupon Impact */}
         <div className="glass-card rounded-[1.5rem] p-4 sm:p-6 lg:p-8 relative overflow-hidden group">
@@ -150,6 +141,16 @@ export const FeatureInsights: React.FC<{ data: DashboardData }> = ({ data }) => 
           </p>
         </div>
       </div>
+
+      {/* Business Insights — moved to bottom */}
+      <DecisionCard
+        title="Coupons & Payment Methods"
+        insights={[
+          "Let's see if coupons actually make customers spend more overall. Sometimes people who would have bought anyway use coupons, which just loses you money.",
+          "Some payment methods (like certain cards or wallets) fail a lot. You need to make sure your customers can pay smoothly without errors.",
+          "Find the 'sweet spot' for discounts—the perfect percentage that encourages customers to buy more, without eating away your profits."
+        ]}
+      />
     </div>
   );
 };
