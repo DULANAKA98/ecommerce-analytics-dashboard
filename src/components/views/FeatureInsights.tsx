@@ -63,10 +63,10 @@ export const FeatureInsights: React.FC<{ data: DashboardData }> = ({ data }) => 
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Coupon Impact */}
-        <div className="glass-card rounded-[1.5rem] p-6 lg:p-8 relative overflow-hidden group">
+        <div className="glass-card rounded-[1.5rem] p-4 sm:p-6 lg:p-8 relative overflow-hidden group">
           <div className="absolute -top-24 -right-24 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
-          <h3 className="text-xl font-bold tracking-tight text-white mb-8 flex items-center gap-2">Avg Spending: Coupon vs No Coupon</h3>
-          <div ref={chart1Ref} className="h-72 w-full relative z-10">
+          <h3 className="text-xl font-bold tracking-tight text-white mb-6 sm:mb-8 flex items-center gap-2">Avg Spending: Coupon vs No Coupon</h3>
+          <div ref={chart1Ref} className="h-64 sm:h-72 w-full relative z-10">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={couponImpact} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
                 <defs>
@@ -95,10 +95,10 @@ export const FeatureInsights: React.FC<{ data: DashboardData }> = ({ data }) => 
         </div>
 
         {/* Failure Rates */}
-        <div className="glass-card rounded-[1.5rem] p-6 lg:p-8 relative overflow-hidden group">
+        <div className="glass-card rounded-[1.5rem] p-4 sm:p-6 lg:p-8 relative overflow-hidden group">
           <div className="absolute -top-24 -right-24 w-48 h-48 bg-rose-500/10 rounded-full blur-3xl pointer-events-none"></div>
-          <h3 className="text-xl font-bold tracking-tight text-white mb-8 flex items-center gap-2">Payment Failure Rate</h3>
-          <div ref={chart2Ref} className="h-72 w-full relative z-10">
+          <h3 className="text-xl font-bold tracking-tight text-white mb-6 sm:mb-8 flex items-center gap-2">Payment Failure Rate</h3>
+          <div ref={chart2Ref} className="h-64 sm:h-72 w-full relative z-10">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={failureRates} layout="vertical" margin={{ top: 10, right: 20, left: 10, bottom: 0 }}>
                 <defs>
@@ -127,10 +127,10 @@ export const FeatureInsights: React.FC<{ data: DashboardData }> = ({ data }) => 
         </div>
         
         {/* Discount Scatter */}
-        <div className="glass-card rounded-[1.5rem] p-6 lg:p-8 relative overflow-hidden group lg:col-span-2">
+        <div className="glass-card rounded-[1.5rem] p-4 sm:p-6 lg:p-8 relative overflow-hidden group lg:col-span-2">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30rem] h-[30rem] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none"></div>
-          <h3 className="text-xl font-bold tracking-tight text-white mb-8 flex items-center gap-2">Discount Ratio vs Net Spending</h3>
-          <div ref={chart3Ref} className="h-80 w-full relative z-10">
+          <h3 className="text-xl font-bold tracking-tight text-white mb-6 sm:mb-8 flex items-center gap-2">Discount Ratio vs Net Spending</h3>
+          <div ref={chart3Ref} className="h-72 sm:h-80 w-full relative z-10">
             <ResponsiveContainer width="100%" height="100%">
               <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />

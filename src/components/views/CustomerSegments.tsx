@@ -56,10 +56,10 @@ export const CustomerSegments: React.FC<{ data: DashboardData }> = ({ data }) =>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Customer Orders vs Total Spending */}
-        <div className="glass-card rounded-[1.5rem] p-6 lg:p-8 relative overflow-hidden group">
+        <div className="glass-card rounded-[1.5rem] p-4 sm:p-6 lg:p-8 relative overflow-hidden group">
           <div className="absolute -top-24 -right-24 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
-          <h3 className="text-xl font-bold tracking-tight text-white mb-8 flex items-center gap-2">Customer Orders vs Total Spending</h3>
-          <div ref={chart1Ref} className="h-72 w-full relative z-10 text-xs">
+          <h3 className="text-xl font-bold tracking-tight text-white mb-6 sm:mb-8 flex items-center gap-2">Customer Orders vs Total Spending</h3>
+          <div ref={chart1Ref} className="h-64 sm:h-72 w-full relative z-10 text-xs sm:text-sm">
             <ResponsiveContainer width="100%" height="100%">
               <ScatterChart margin={{ top: 10, right: 20, bottom: 20, left: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
@@ -87,10 +87,10 @@ export const CustomerSegments: React.FC<{ data: DashboardData }> = ({ data }) =>
         </div>
 
         {/* Predictive Feature Importance Proxy */}
-        <div className="glass-card rounded-[1.5rem] p-6 lg:p-8 relative overflow-hidden group">
+        <div className="glass-card rounded-[1.5rem] p-4 sm:p-6 lg:p-8 relative overflow-hidden group">
           <div className="absolute -top-24 -right-24 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
-          <h3 className="text-xl font-bold tracking-tight text-white mb-8 flex items-center gap-2">What Drives VIP Behavior?</h3>
-          <div ref={chart2Ref} className="h-72 w-full relative z-10 text-xs text-slate-300">
+          <h3 className="text-xl font-bold tracking-tight text-white mb-6 sm:mb-8 flex items-center gap-2">What Drives VIP Behavior?</h3>
+          <div ref={chart2Ref} className="h-64 sm:h-72 w-full relative z-10 text-xs sm:text-sm text-slate-300">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={featureImportance} layout="vertical" margin={{ top: 10, right: 20, left: 30, bottom: 0 }}>
                 <defs>

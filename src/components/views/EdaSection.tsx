@@ -52,10 +52,10 @@ export const EdaSection: React.FC<{ data: DashboardData }> = ({ data }) => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Monthly Orders */}
-        <div className="glass-card rounded-[1.5rem] p-6 lg:p-8 relative overflow-hidden group">
+        <div className="glass-card rounded-[1.5rem] p-4 sm:p-6 lg:p-8 relative overflow-hidden group">
           <div className="absolute -top-24 -right-24 w-48 h-48 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
-          <h3 className="text-xl font-bold tracking-tight text-white mb-8 flex items-center gap-2">Monthly Order Volume</h3>
-          <div ref={chart1Ref} className="h-72 w-full relative z-10">
+          <h3 className="text-xl font-bold tracking-tight text-white mb-6 sm:mb-8 flex items-center gap-2">Monthly Order Volume</h3>
+          <div ref={chart1Ref} className="h-64 sm:h-72 w-full relative z-10 text-xs sm:text-sm">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={monthlyOrders} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                 <defs>
@@ -82,10 +82,10 @@ export const EdaSection: React.FC<{ data: DashboardData }> = ({ data }) => {
         </div>
 
         {/* Order Status */}
-        <div className="glass-card rounded-[1.5rem] p-6 lg:p-8 relative overflow-hidden group">
+        <div className="glass-card rounded-[1.5rem] p-4 sm:p-6 lg:p-8 relative overflow-hidden group">
           <div className="absolute -top-24 -right-24 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
-          <h3 className="text-xl font-bold tracking-tight text-white mb-8 flex items-center gap-2">Order Status Distribution</h3>
-          <div ref={chart2Ref} className="h-72 w-full relative z-10">
+          <h3 className="text-xl font-bold tracking-tight text-white mb-6 sm:mb-8 flex items-center gap-2">Order Status Distribution</h3>
+          <div ref={chart2Ref} className="h-64 sm:h-72 w-full relative z-10 text-xs sm:text-sm">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 {chart2Visible && (

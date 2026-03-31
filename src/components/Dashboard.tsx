@@ -18,13 +18,13 @@ export const Dashboard: React.FC<{ data: DashboardData, onReset: () => void }> =
             </div>
           </div>
           <div>
-            <h1 className="text-3xl font-black text-white mb-1 tracking-tight">E-Commerce Analytics <span className="text-gradient">Dashboard</span></h1>
-            <p className="text-slate-400 text-sm font-medium">Derived from transactions predicting high-value and promotional behaviors</p>
+            <h1 className="text-2xl sm:text-3xl font-black text-white mb-1 tracking-tight">E-Commerce Analytics <span className="text-gradient">Dashboard</span></h1>
+            <p className="text-slate-400 text-xs sm:text-sm font-medium">Derived from transactions predicting high-value and promotional behaviors</p>
           </div>
         </div>
         <button 
           onClick={onReset}
-          className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-slate-900/50 border border-slate-700/50 text-slate-300 hover:bg-slate-800 hover:text-white transition-all shadow-sm flex-shrink-0 group hover:border-indigo-500/30"
+          className="flex items-center justify-center w-full md:w-auto gap-2 px-6 py-2.5 rounded-full bg-slate-900/50 border border-slate-700/50 text-slate-300 hover:bg-slate-800 hover:text-white transition-all shadow-sm flex-shrink-0 group hover:border-indigo-500/30"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> 
           <span className="font-semibold text-sm">Upload New Dataset</span>
@@ -40,7 +40,7 @@ export const Dashboard: React.FC<{ data: DashboardData, onReset: () => void }> =
       </div>
 
       {/* Tabs */}
-      <div className="flex flex-wrap gap-2 mb-10 bg-[#0f172a]/80 backdrop-blur-md p-1.5 rounded-2xl w-fit border border-white/5 shadow-xl">
+      <div className="flex flex-nowrap overflow-x-auto gap-2 mb-10 bg-[#0f172a]/80 backdrop-blur-md p-1.5 rounded-2xl w-full sm:w-fit border border-white/5 shadow-xl pb-2 sm:pb-1.5 md:overflow-visible">
         <TabButton icon={<PieChart />} label="Store Overview" active={activeTab === 'eda'} onClick={() => setActiveTab('eda')} />
         <TabButton icon={<Activity />} label="Coupons & Payments" active={activeTab === 'features'} onClick={() => setActiveTab('features')} />
         <TabButton icon={<Focus />} label="VIP Customers" active={activeTab === 'segments'} onClick={() => setActiveTab('segments')} />
@@ -71,8 +71,8 @@ const KpiCard: React.FC<{ title: string, value: string | number, icon: React.Rea
         {icon}
       </div>
       <div className="relative z-10">
-        <p className="text-slate-400 text-sm font-semibold mb-1 tracking-wide uppercase">{title}</p>
-        <p className="text-3xl font-black text-white tracking-tight">{value}</p>
+        <p className="text-slate-400 text-xs sm:text-sm font-semibold mb-1 tracking-wide uppercase">{title}</p>
+        <p className="text-2xl sm:text-3xl font-black text-white tracking-tight">{value}</p>
       </div>
     </div>
   );
@@ -81,7 +81,7 @@ const KpiCard: React.FC<{ title: string, value: string | number, icon: React.Rea
 const TabButton: React.FC<{ icon: React.ReactNode, label: string, active: boolean, onClick: () => void }> = ({ icon, label, active, onClick }) => (
   <button
     onClick={onClick}
-    className={`flex items-center gap-2.5 px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-300 ${
+    className={`flex items-center whitespace-nowrap flex-shrink-0 gap-2.5 px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-300 ${
       active 
         ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/20 border-transparent' 
         : 'text-slate-400 hover:text-slate-200 hover:bg-white/5 border border-transparent'

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { UploadCloud, FileSpreadsheet, ArrowRight } from 'lucide-react';
+import { UploadCloud, ArrowRight } from 'lucide-react';
 
 interface FileUploadProps {
   onFileUpload: (file: File) => void;
@@ -35,19 +35,19 @@ export const FileUpload: React.FC<FileUploadProps> = ({ onFileUpload }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full max-w-3xl mx-auto py-12 px-4 sm:px-6">
+    <div className="flex flex-col items-center justify-center w-full max-w-3xl mx-auto py-8 md:py-12 px-4 sm:px-6">
       
       {/* Title Area */}
-      <div className="mb-12 text-center relative">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-indigo-500/20 rounded-full blur-[80px] pointer-events-none"></div>
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-500/20 bg-indigo-500/10 text-indigo-300 text-xs font-semibold tracking-widest uppercase mb-6 shadow-sm">
+      <div className="mb-8 md:mb-12 text-center relative px-2">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 md:w-48 h-32 md:h-48 bg-indigo-500/20 rounded-full blur-[80px] pointer-events-none"></div>
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-500/20 bg-indigo-500/10 text-indigo-300 text-[10px] sm:text-xs font-semibold tracking-widest uppercase mb-4 sm:mb-6 shadow-sm">
           <span>Developed by Dulanaka Siriwardana</span>
         </div>
-        <h1 className="text-5xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-white via-indigo-100 to-indigo-400 mb-6 tracking-tight leading-tight drop-shadow-sm">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-white via-indigo-100 to-indigo-400 mb-4 sm:mb-6 tracking-tight leading-tight drop-shadow-sm">
           E-Commerce Analytics <br className="hidden sm:block" /> Dashboard
         </h1>
-        <p className="text-slate-400 text-lg sm:text-xl font-light max-w-2xl mx-auto leading-relaxed">
-          Upload your <code className="bg-slate-800/80 text-indigo-300 px-2.5 py-1 rounded-md border border-slate-700/50 font-mono text-sm shadow-inner mx-1">Transaction Data</code> to unlock predictive insights and drive strategic growth.
+        <p className="text-slate-400 text-base sm:text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed">
+          Upload your <code className="bg-slate-800/80 text-indigo-300 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md border border-slate-700/50 font-mono text-xs sm:text-sm shadow-inner mx-1">Transaction Data</code> to unlock predictive insights and drive strategic growth.
         </p>
       </div>
 
@@ -69,36 +69,35 @@ export const FileUpload: React.FC<FileUploadProps> = ({ onFileUpload }) => {
         }`}></div>
         
         {/* Inner Glass Container */}
-        <div className={`relative glass-panel rounded-[1.875rem] p-10 sm:p-16 flex flex-col items-center justify-center cursor-pointer transition-colors duration-500 z-10 ${
+        <div className={`relative glass-panel rounded-[1.875rem] p-6 sm:p-10 md:p-16 flex flex-col items-center justify-center cursor-pointer transition-colors duration-500 z-10 w-full ${
           dragActive ? 'bg-indigo-950/40 border-indigo-500/50' : 'hover:bg-slate-900/50'
         }`}>
           
-          <div className="relative mb-8">
+          <div className="relative mb-6 sm:mb-8">
             <div className={`absolute inset-0 rounded-full blur-xl transition-all duration-500 ${
               dragActive ? 'bg-indigo-500/40 scale-150' : 'bg-indigo-500/10 group-hover:scale-125'
             }`}></div>
-            <div className={`relative p-5 rounded-2xl border transition-all duration-500 ${
+            <div className={`relative p-4 sm:p-5 rounded-2xl border transition-all duration-500 ${
               dragActive 
                 ? 'bg-indigo-500/20 border-indigo-500/50 shadow-[0_0_30px_rgba(99,102,241,0.3)]' 
                 : 'bg-slate-800/80 border-slate-700 shadow-xl group-hover:border-indigo-500/30 group-hover:bg-slate-800'
             }`}>
-              <UploadCloud className={`w-14 h-14 transition-colors duration-500 ${
+              <UploadCloud className={`w-10 h-10 sm:w-14 sm:h-14 transition-colors duration-500 ${
                 dragActive ? 'text-indigo-300' : 'text-slate-400 group-hover:text-indigo-400'
               }`} />
             </div>
           </div>
 
-          <h3 className="text-2xl font-bold text-slate-100 mb-3 tracking-wide">
+          <h3 className="text-xl sm:text-2xl font-bold text-slate-100 mb-2 sm:mb-3 tracking-wide text-center">
             {dragActive ? 'Drop dataset here' : 'Drag & drop dataset'}
           </h3>
-          <p className="text-slate-400 mb-8 text-center max-w-sm flex items-center justify-center gap-2">
-            <FileSpreadsheet className="w-4 h-4 text-slate-500" />
-            Supports standard CSV format up to 50MB
+          <p className="text-slate-400 mb-6 sm:mb-8 text-sm sm:text-base text-center max-w-sm flex items-center justify-center gap-2">
+            <span>Supports standard CSV format up to 50MB</span>
           </p>
           
-          <label className="relative cursor-pointer group/btn">
+          <label className="relative cursor-pointer group/btn w-full sm:w-auto">
             <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full blur opacity-70 group-hover/btn:opacity-100 transition duration-300"></div>
-            <div className="relative flex items-center gap-3 bg-slate-950 text-white px-8 py-3.5 rounded-full font-semibold border border-white/10 transition-transform duration-300 group-hover/btn:-translate-y-0.5 shadow-xl">
+            <div className="relative flex items-center justify-center gap-3 bg-slate-950 text-white px-6 sm:px-8 py-3.5 rounded-full font-semibold border border-white/10 transition-transform duration-300 group-hover/btn:-translate-y-0.5 shadow-xl w-full">
               <span>Browse Files</span>
               <ArrowRight className="w-4 h-4 text-indigo-400 group-hover/btn:translate-x-1 transition-transform" />
               <input 

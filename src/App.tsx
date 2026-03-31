@@ -44,10 +44,10 @@ function App() {
                 <Loader2 className="w-10 h-10 text-indigo-300 animate-spin" />
               </div>
             </div>
-            <div className="text-center space-y-3">
-              <p className="text-2xl font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-indigo-200 via-white to-indigo-200 uppercase">Processing Dataset</p>
-              <div className="flex items-center justify-center gap-2 text-sm font-medium text-indigo-400/90">
-                <span className="w-2 h-2 rounded-full bg-indigo-500 animate-[ping_1.5s_cubic-bezier(0,0,0.2,1)_infinite]"></span>
+            <div className="text-center space-y-3 px-4">
+              <p className="text-xl sm:text-2xl font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-indigo-200 via-white to-indigo-200 uppercase text-center">Processing Dataset</p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-xs sm:text-sm font-medium text-indigo-400/90 text-center">
+                <span className="w-2 h-2 rounded-full bg-indigo-500 animate-[ping_1.5s_cubic-bezier(0,0,0.2,1)_infinite] mb-1 sm:mb-0"></span>
                 <span className="tracking-wide">Running descriptive & predictive models...</span>
               </div>
             </div>

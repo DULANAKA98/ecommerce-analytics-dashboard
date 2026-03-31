@@ -8,7 +8,7 @@ interface DecisionCardProps {
 
 export const DecisionCard: React.FC<DecisionCardProps> = ({ title, insights }) => {
   return (
-    <div className="glass-card border-indigo-500/20 rounded-[1.5rem] p-6 lg:p-8 mb-8 relative overflow-hidden group">
+    <div className="glass-card border-indigo-500/20 rounded-[1.5rem] p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8 relative overflow-hidden group">
       {/* Animated Background Gradients */}
       <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-indigo-500/5 rounded-full blur-[100px] -mr-[20rem] -mt-[20rem] transition-transform duration-1000 group-hover:translate-x-10 group-hover:translate-y-10 pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/5 rounded-full blur-[80px] -ml-32 -mb-32 pointer-events-none"></div>
@@ -17,7 +17,7 @@ export const DecisionCard: React.FC<DecisionCardProps> = ({ title, insights }) =
       <div className="absolute top-0 left-8 right-8 h-[1px] bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent opacity-50"></div>
 
       <div className="relative z-10">
-        <div className="flex flex-col md:flex-row md:items-start gap-6">
+        <div className="flex flex-col md:flex-row md:items-start gap-4 sm:gap-6">
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-2.5 bg-indigo-500/10 border border-indigo-500/20 rounded-xl shadow-inner relative group-hover:shadow-[0_0_20px_rgba(99,102,241,0.2)] transition-shadow duration-500">
