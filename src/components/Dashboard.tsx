@@ -37,7 +37,7 @@ export const Dashboard: React.FC<{ data: DashboardData, onReset: () => void }> =
         <KpiCard title="Total Orders" value={data.metrics.totalOrders.toLocaleString()} icon={<TrendingUp className="w-6 h-6 text-blue-400" />} colorClass="blue" />
         <KpiCard title="Total Customers" value={data.metrics.totalCustomers.toLocaleString()} icon={<Users className="w-6 h-6 text-indigo-400" />} colorClass="indigo" />
         <KpiCard title="Avg Order Value" value={`$${data.metrics.avgOrderValue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits:2})}`} icon={<Target className="w-6 h-6 text-purple-400" />} colorClass="purple" />
-        <KpiCard title="Data Coverage" value={`${data.metrics.startDate} to ${data.metrics.endDate}`} icon={<Calendar className="w-6 h-6 text-amber-400" />} colorClass="amber" isDateRange />
+        <KpiCard title="Data Coverage" value={`From ${data.metrics.startDate} To ${data.metrics.endDate}`} icon={<Calendar className="w-6 h-6 text-amber-400" />} colorClass="amber" isDateRange />
       </div>
 
       {/* Tabs */}
@@ -67,8 +67,11 @@ const KpiCard: React.FC<{ title: string, value: string | number, icon: React.Rea
   };
 
   const getFontSize = (val: string | number) => {
-    if (isDateRange) return 'text-xs sm:text-sm';
     const s = String(val);
+    if (isDateRange) {
+      if (s.length > 22) return 'text-[10px] sm:text-xs';
+      return 'text-xs sm:text-sm lg:text-base';
+    }
     if (s.length > 14) return 'text-lg sm:text-xl';
     if (s.length > 10) return 'text-xl sm:text-2xl';
     return 'text-2xl sm:text-3xl';
@@ -82,7 +85,7 @@ const KpiCard: React.FC<{ title: string, value: string | number, icon: React.Rea
       </div>
       <div className="relative z-10 min-w-0">
         <p className="text-slate-400 text-[10px] sm:text-xs font-semibold mb-1 tracking-wide uppercase truncate">{title}</p>
-        <p className={`${getFontSize(value)} font-black text-white tracking-tight leading-tight truncate`}>{value}</p>
+        <p className={`${getFontSize(value)} font-black text-white tracking-tight leading-tight`}>{value}</p>
       </div>
     </div>
   );
