@@ -9,49 +9,66 @@ const COLORS = ['#6366f1', '#10b981', '#f43f5e', '#f59e0b', '#8b5cf6'];
 
 // ─── helpers ────────────────────────────────────────────────────────────────
 
-const getISOWeek = (d: Date): string => {
-  const date = new Date(d);
-  date.setHours(0, 0, 0, 0);
-  date.setDate(date.getDate() + 4 - (date.getDay() || 7));
-  const yearStart = new Date(date.getFullYear(), 0, 1);
-  const week = Math.ceil(((date.getTime() - yearStart.getTime()) / 86400000 + 1) / 7);
-  return `${date.getFullYear()}-W${String(week).padStart(2, '0')}`;
-};
-
-const getBiMonth = (d: Date): string => {
-  const m = d.getMonth() + 1; // 1-12
-  const biMonth = Math.ceil(m / 2); // pairs: Jan-Feb=1, Mar-Apr=2, May-Jun=3…
-  const labels = ['Jan-Feb', 'Mar-Apr', 'May-Jun', 'Jul-Aug', 'Sep-Oct', 'Nov-Dec'];
-  return `${d.getFullYear()} ${labels[biMonth - 1]}`;
-};
-
 type ChartMode = 'daily' | 'weekly' | 'bimonthly' | 'monthly';
 
 const buildOrderVolume = (
   transactions: ProcessedTransaction[],
   mode: ChartMode
 ): { label: string; orders: number }[] => {
-  const grouped: Record<string, number> = {};
+  const grouped: Record<string, { label: string; orders: number }> = {};
 
   transactions.forEach(t => {
-    let key: string;
+    let sortKey: string;
+    let displayLabel: string;
+    const d = t.createdAt;
+
     if (mode === 'daily') {
-      const d = t.createdAt;
-      key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+      sortKey = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+      displayLabel = sortKey;
     } else if (mode === 'weekly') {
-      key = getISOWeek(t.createdAt);
+      // Monday to Sunday range
+      const day = d.getDay();
+      const diff = d.getDate() - (day === 0 ? 6 : day - 1);
+      const monday = new Date(new Date(d).setHours(0, 0, 0, 0));
+      monday.setDate(diff);
+      
+      const sunday = new Date(monday);
+      sunday.setDate(monday.getDate() + 6);
+      
+      sortKey = `${monday.getFullYear()}-${String(monday.getMonth() + 1).padStart(2, '0')}-${String(monday.getDate()).padStart(2, '0')}`;
+      const format = (dt: Date) => `${String(dt.getDate()).padStart(2, '0')}/${String(dt.getMonth() + 1).padStart(2, '0')}`;
+      displayLabel = `${format(monday)} to ${format(sunday)}`;
     } else if (mode === 'bimonthly') {
-      key = getBiMonth(t.createdAt);
+      // Semi-monthly: 1st-14th, 15th-End
+      const isFirstHalf = d.getDate() <= 14;
+      const monthNum = d.getMonth() + 1;
+      const monthStr = String(monthNum).padStart(2, '0');
+      
+      sortKey = `${d.getFullYear()}-${monthStr}-${isFirstHalf ? '01' : '15'}`;
+      if (isFirstHalf) {
+        displayLabel = `01/${monthStr} to 14/${monthStr}`;
+      } else {
+        const lastDay = new Date(d.getFullYear(), monthNum, 0).getDate();
+        displayLabel = `15/${monthStr} to ${lastDay}/${monthStr}`;
+      }
     } else {
-      key = t.orderMonth === 'Unknown' ? 'Other' : t.orderMonth;
+      // Monthly
+      sortKey = t.orderMonth === 'Unknown' ? '9999-12' : t.orderMonth;
+      displayLabel = t.orderMonth === 'Unknown' ? 'Other' : t.orderMonth;
     }
-    grouped[key] = (grouped[key] || 0) + 1;
+
+    if (!grouped[sortKey]) {
+      grouped[sortKey] = { label: displayLabel, orders: 0 };
+    }
+    grouped[sortKey].orders += 1;
   });
 
   return Object.keys(grouped)
     .sort()
-    .map(k => ({ label: k, orders: grouped[k] }));
+    .map(k => grouped[k]);
 };
+
+
 
 const CHART_META: Record<ChartMode, { title: string; insight: string }> = {
   daily: {
@@ -64,7 +81,7 @@ const CHART_META: Record<ChartMode, { title: string; insight: string }> = {
   },
   bimonthly: {
     title: 'Bi-Monthly Order Volume',
-    insight: 'This chart groups orders into two-month windows. It smooths out noise and reveals medium-term seasonal patterns across the period.',
+    insight: 'This chart splits each month into two 14/15-day periods. It helps identify trends within each month and provides a higher fidelity view of your performance.',
   },
   monthly: {
     title: 'Monthly Order Volume',
@@ -131,7 +148,7 @@ export const EdaSection: React.FC<{ data: DashboardData }> = ({ data }) => {
           </div>
           <div ref={chart1Ref} className="h-64 sm:h-72 w-full relative z-10 text-xs sm:text-sm">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+              <BarChart data={chartData} margin={{ top: 10, right: 30, left: -20, bottom: 20 }}>
                 <defs>
                   <linearGradient id="colorOrders" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#6366f1" stopOpacity={0.8}/>
@@ -145,7 +162,7 @@ export const EdaSection: React.FC<{ data: DashboardData }> = ({ data }) => {
                   fontSize={10}
                   tickLine={false}
                   axisLine={false}
-                  tickMargin={10}
+                  tickMargin={12}
                   interval="preserveStartEnd"
                 />
                 <YAxis stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} tickMargin={10} />
@@ -169,14 +186,14 @@ export const EdaSection: React.FC<{ data: DashboardData }> = ({ data }) => {
           <h3 className="text-xl font-bold tracking-tight text-white mb-6 sm:mb-8 flex items-center gap-2">Order Status Distribution</h3>
           <div ref={chart2Ref} className="h-64 sm:h-72 w-full relative z-10 text-xs sm:text-sm">
             <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
+              <PieChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
                 {chart2Visible && (
                   <Pie
                     data={orderStatus}
                     cx="50%"
                     cy="50%"
-                    innerRadius={70}
-                    outerRadius={100}
+                    innerRadius="60%"
+                    outerRadius="80%"
                     paddingAngle={5}
                     dataKey="value"
                     label={({ name, percent }) => `${name} ${((percent || 0) * 100).toFixed(0)}%`}

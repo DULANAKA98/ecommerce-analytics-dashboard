@@ -93,28 +93,28 @@ export const CustomerSegments: React.FC<{ data: DashboardData }> = ({ data }) =>
       {/* VIP Customer Roster */}
       <div className="glass-card border-purple-500/20 rounded-[1.5rem] p-4 sm:p-6 lg:p-8 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/5 rounded-full blur-[80px] -mr-48 -mt-48 pointer-events-none"></div>
-        <div className="flex items-center gap-3 mb-8 relative z-10">
+        <div className="flex flex-col sm:flex-row items-center gap-4 mb-8 relative z-10">
           <div className="p-2.5 bg-amber-500/10 border border-amber-500/20 rounded-xl">
             <Crown className="w-5 h-5 text-amber-400" />
           </div>
-          <div className="group relative">
+          <div className="group relative flex flex-col items-center sm:items-start">
             <div className="flex items-center gap-2 cursor-help">
               <h3 className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-white font-bold text-xl tracking-tight">VIP Customers</h3>
               <Info className="w-3.5 h-3.5 text-slate-500" />
             </div>
             
-            {/* Attractive Hover Box (Methodology Tooltip) */}
-            <div className="absolute left-full top-0 ml-4 w-72 p-4 bg-black border border-white/20 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,1)] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-[100]">
-              <div className="flex items-center gap-2 mb-2 text-amber-400 text-xs font-bold uppercase tracking-wider">
-                <Focus className="w-3.5 h-3.5" />
+            {/* Attractive Hover Box (Methodology Tooltip) - Positined below on mobile, to the right on desktop */}
+            <div className="absolute left-1/2 -translate-x-1/2 top-full mt-4 sm:left-full sm:translate-x-0 sm:top-0 sm:ml-4 w-64 p-4 bg-[#0f172a] border border-white/10 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none z-[100] transform scale-95 group-hover:scale-100">
+              <div className="flex items-center gap-2 mb-2 text-amber-400 text-[10px] font-bold uppercase tracking-wider">
+                <Focus className="w-3 h-3" />
                 Methodology
               </div>
-              <p className="text-slate-300 text-sm leading-relaxed">
+              <p className="text-slate-300 text-xs leading-relaxed">
                 VIPs are identified by selecting the <strong>top 25% of customers</strong> who have the highest total lifetime spending.
               </p>
             </div>
           </div>
-          <span className="ml-auto text-sm font-bold text-amber-300 bg-amber-500/10 border border-amber-500/20 rounded-full px-3 py-1">
+          <span className="sm:ml-auto text-sm font-bold text-amber-300 bg-amber-500/10 border border-amber-500/20 rounded-full px-3 py-1">
             {vipCustomers.length} identified
           </span>
         </div>
