@@ -22,13 +22,21 @@ export const FeatureInsights: React.FC<{ data: DashboardData }> = ({ data }) => 
     ];
   }, [transactions]);
 
+  const paymentMethodNames: Record<string, string> = {
+    '1': 'Card Payments',
+    '2': 'Online Banking',
+    '3': 'E-Wallets',
+    '4': 'Cash on Delivery',
+    '5': 'Buy Now, Pay Later',
+  };
+
   const failureRates = useMemo(() => {
     const grouped = groupBy(transactions, 'paymentMethodId');
     return Object.keys(grouped).map(methodId => {
       const txs = grouped[methodId];
       const failed = txs.filter(t => t.isFailedPayment).length;
       return {
-        method: `Method ${methodId}`,
+        method: paymentMethodNames[methodId] || `Method ${methodId}`,
         rate: parseFloat(((failed / txs.length) * 100).toFixed(1))
       };
     }).sort((a, b) => b.rate - a.rate);
