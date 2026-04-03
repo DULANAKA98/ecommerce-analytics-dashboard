@@ -1,5 +1,13 @@
 # E-Commerce Data Analytics Dashboard
 
+<img width="1889" height="932" alt="Screenshot 2026-04-02 211800" src="https://github.com/user-attachments/assets/9d4ce022-b8aa-4e7e-abba-3fcf58019eb8" />
+<img width="1888" height="945" alt="Screenshot 2026-04-02 211820" src="https://github.com/user-attachments/assets/5986c166-3152-4e0a-ab9b-7bd2f6b70869" />
+<img width="1904" height="942" alt="Screenshot 2026-04-02 211832" src="https://github.com/user-attachments/assets/61916426-ec8f-4980-b3c5-a6706e4c79b9" />
+<img width="1889" height="947" alt="Screenshot 2026-04-02 211849" src="https://github.com/user-attachments/assets/f9adc7b0-0daf-419d-b64a-99ae222d65f4" />
+<img width="1873" height="948" alt="Screenshot 2026-04-02 211905" src="https://github.com/user-attachments/assets/2b26b6b0-e960-4ade-8574-36bc657be37f" />
+<img width="1862" height="938" alt="Screenshot 2026-04-02 211920" src="https://github.com/user-attachments/assets/aa311e80-282c-4b6c-9ea3-9af43e608843" />
+<img width="1867" height="944" alt="Screenshot 2026-04-02 211931" src="https://github.com/user-attachments/assets/f7bf8770-3a55-4003-a978-5bead7aba426" />
+
 An interactive Business Intelligence (BI) dashboard designed to transform raw e-commerce transaction data into actionable strategic insights. This project showcases applied data analysis principles, customer segmentation methodologies, and exploratory data analysis (EDA) techniques.
 
 ## Core Data Analytics Methodologies
@@ -29,11 +37,4 @@ While the core purpose of this project is data analysis and KPI extraction, the 
 2. Install dependencies: `npm install`
 3. Start the dev server: `npm run dev`
 4. Upload an e-commerce `.csv` transaction dataset directly in the browser to view the dynamic reporting.
-<img width="1888" height="945" alt="Screenshot 2026-04-02 211820" src="https://github.com/user-attachments/assets/66212394-a3f6-4816-8540-66920b018c71" />
-<img width="1904" height="942" alt="Screenshot 2026-04-02 211832" src="https://github.com/user-attachments/assets/ea36f066-2e1d-428c-a068-2296e674e573" />
-<img width="1889" height="947" alt="Screenshot 2026-04-02 211849" src="https://github.com/user-attachments/assets/b6cfa913-f423-436f-af53-f70e187c8355" />
-<img width="1873" height="948" alt="Screenshot 2026-04-02 211905" src="https://github.com/user-attachments/assets/754f1767-25ba-4385-b6f4-10fc5c378aa2" />
-<img width="1862" height="938" alt="Screenshot 2026-04-02 211920" src="https://github.com/user-attachments/assets/209a9ca8-e69a-42be-ac9e-2f5a8a9ef3df" />
-<img width="1867" height="944" alt="Screenshot 2026-04-02 211931" src="https://github.com/user-attachments/assets/2b1b61c3-f7e2-4b8b-bf85-9e00bca404c6" />
-<img width="1889" height="932" alt="Screenshot 2026-04-02 211800" src="https://github.com/user-attachments/assets/059d945d-b0ae-473e-9d09-c61c4eabf3d2" />
 
